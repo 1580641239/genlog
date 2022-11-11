@@ -10,13 +10,12 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 log_file_path = os.path.join(BASE_DIR, 'log/access.log')
 err_log_file_path = os.path.join(BASE_DIR, 'log/err.log')
 logger.remove(handler_id=None)
-logger.add(log_file_path, format="{message}", rotation="50 MB", encoding='utf-8',
+logger.add(log_file_path, format="{message}", rotation="1 H", level="INFO",
+           enqueue=True, encoding='utf-8',
            retention=2)
-logger.add(err_log_file_path, rotation="100 MB", encoding='utf-8', retention=2, level='ERROR')
-
+logger.add(err_log_file_path, rotation="1 H", encoding='utf-8', retention=2, level='ERROR')
 
 local_time = time.localtime(time.time())
-
 
 n = 0
 while True:
@@ -42,4 +41,4 @@ while True:
                 """
         logger.error(line)
         n = 0
-        time.sleep(1)
+        time.sleep(2)
